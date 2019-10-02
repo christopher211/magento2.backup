@@ -2,15 +2,26 @@
 
 namespace Smartosc\Article\Block;
 
-class Display extends \Magento\Framework\View\Element\Template
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Framework\View\Result\PageFactory;
+use Smartosc\Article\Model\ResourceModel\Article\CollectionFactory;
+
+class Display extends Template
 {
-    public function __construct(\Magento\Framework\View\Element\Template\Context $context)
+    public $_pageFactory;
+    public $_articleCollectionFactory;
+
+    public function __construct(Context $context, PageFactory $pageFactory, CollectionFactory $articleCollectionFactory)
     {
-        parent::__construct($context);
+        $this->_pageFactory = $pageFactory;
+        $this->_articleCollectionFactory = $articleCollectionFactory;
+        return parent::__construct($context);
     }
 
     public function article()
     {
-        echo 'Fuckin wow shet';
+        $collection = $this->_articleCollectionFactory->create();
+        return $collection->getData();
     }
 }

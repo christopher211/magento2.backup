@@ -213,7 +213,6 @@ return [
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
         'Mageplaza_Core' => 1,
-        'Mageplaza_GoogleMaps' => 1,
         'Mageplaza_Smtp' => 1,
         'Smartosc_Article' => 1,
         'Smartosc_HelloWorld' => 1,
