@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @var \Smartosc\Article\Block\Detail $block
+ */
+
+$block->getId();
+$data = $block->getDetailArticle()->getData();
+var_dump($data);
+die;
+
+?>
+
+<a><?=$data['post_content']?></a>
+<a><?=$data['tag']?></a>
+
+</body>
+</html>

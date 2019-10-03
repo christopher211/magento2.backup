@@ -6,8 +6,8 @@
         <title>Article</title>
     </head>
     <referenceContainer name="content">
-        <block class="Smartosc\Article\Block\Display"
-               name="article_display"
-               template="Smartosc_Article::article.phtml" />
+        <block class="Smartosc\Article\Block\Detail"
+               name="article_detail"
+               template="Smartosc_Article::article_detail.phtml" />
     </referenceContainer>
 </page>

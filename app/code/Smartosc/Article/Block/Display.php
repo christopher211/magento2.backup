@@ -19,9 +19,46 @@ class Display extends Template
         return parent::__construct($context);
     }
 
-    public function article()
+    public function getArticle()
     {
+        $limit = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 2;
+        $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
+
         $collection = $this->_articleCollectionFactory->create();
-        return $collection->getData();
+        $collection->setPageSize($limit);
+        $collection->setCurPage($page);
+
+        return $collection;
+    }
+
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+        $this->pageConfig->getTitle()->set(__('Article'));
+
+        if ($this->getArticle()) {
+            $pager = $this->getLayout()->createBlock(
+                'Magento\Theme\Block\Html\Pager',
+                'smartosc.article'
+            )
+                ->setAvailableLimit([5=>5,10=>10])
+                ->setShowPerPage(true)
+                ->setCollection($this->getArticle());
+
+            $this->setChild('pager', $pager);
+            $this->getArticle()->load();
+        }
+
+        return $this;
+    }
+
+    public function getPagerHtml()
+    {
+        return $this->getChildHtml('pager');
+    }
+
+    public function getArticleUrl($id)
+    {
+        return "/article/index/detail/$id";
     }
 }
