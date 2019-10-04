@@ -33,19 +33,12 @@ class Detail extends Template
 
     public function getDetailArticle()
     {
-        $collection = $this->_articleCollectionFactory->create();
-
-//        $limit = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 2;
-//        $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
-
-//        $collection->setPageSize($limit);
-//        $collection->setCurPage($page);
-
+        $collection = $this->_articleCollectionFactory->create()->addFieldToFilter(['id'], [$this->getId()]);
         return $collection;
     }
 
-//    protected function _prepareLayout()
-//    {
+    protected function _prepareLayout()
+    {
 //        parent::_prepareLayout();
 //        $this->pageConfig->getTitle()->set(__('Article'));
 //
@@ -63,15 +56,10 @@ class Detail extends Template
 //        }
 //
 //        return $this;
-//    }
+    }
 
-//    public function getPagerHtml()
-//    {
-//        return $this->getChildHtml('pager');
-//    }
-//
-//    public function getArticleUrl($id)
-//    {
-//        return "/article/index/detail/$id";
-//    }
+    public function getPagerHtml()
+    {
+        return $this->getChildHtml('pager');
+    }
 }

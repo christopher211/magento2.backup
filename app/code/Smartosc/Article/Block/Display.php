@@ -21,7 +21,7 @@ class Display extends Template
 
     public function getArticle()
     {
-        $limit = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 2;
+        $limit = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 5;
         $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
 
         $collection = $this->_articleCollectionFactory->create();
@@ -41,7 +41,7 @@ class Display extends Template
                 'Magento\Theme\Block\Html\Pager',
                 'smartosc.article'
             )
-                ->setAvailableLimit([5=>5,10=>10])
+                ->setAvailableLimit([5=>5,10=>10,15=>15])
                 ->setShowPerPage(true)
                 ->setCollection($this->getArticle());
 
@@ -59,6 +59,6 @@ class Display extends Template
 
     public function getArticleUrl($id)
     {
-        return "/article/index/detail/$id";
+        return "/article/index/detail?id=$id";
     }
 }

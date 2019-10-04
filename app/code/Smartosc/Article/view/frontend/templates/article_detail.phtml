@@ -4,15 +4,14 @@
  * @var \Smartosc\Article\Block\Detail $block
  */
 
-$block->getId();
 $data = $block->getDetailArticle()->getData();
-var_dump($data);
-die;
 
 ?>
 
-<a><?=$data['post_content']?></a>
-<a><?=$data['tag']?></a>
+<?php foreach ($data as $article): ?>
+<h2><?= $article['post_content'] ?></h2><br/>
+<h4><?= $article['tags'] ?></h4>
+<?php endforeach;?>
 
 </body>
 </html>

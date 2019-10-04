@@ -87,16 +87,16 @@ class InstallSchema implements InstallSchemaInterface
                 ->setComment('Post Table');
             $installer->getConnection()->createTable($table);
 
-            $installer->getConnection()->addIndex(
-                $installer->getTable('sm_article'),
-                $setup->getIdxName(
-                    $installer->getTable('sm_article'),
-                    ['name','url_key','post_content','tags','featured_image'],
-                    AdapterInterface::INDEX_TYPE_FULLTEXT
-                ),
-                ['name','url_key','post_content','tags','featured_image'],
-                AdapterInterface::INDEX_TYPE_FULLTEXT
-            );
+//            $installer->getConnection()->addIndex(
+//                $installer->getTable('sm_article'),
+//                $setup->getIdxName(
+//                    $installer->getTable('sm_article'),
+//                    ['name','url_key','post_content','tags','featured_image'],
+//                    AdapterInterface::INDEX_TYPE_FULLTEXT
+//                ),
+//                ['name','url_key','post_content','tags','featured_image'],
+//                AdapterInterface::INDEX_TYPE_FULLTEXT
+//            );
         }
         $installer->endSetup();
     }

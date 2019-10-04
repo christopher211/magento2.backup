@@ -3,7 +3,7 @@
       layout="2columns-left"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <title>Article</title>
+        <title>Article - Detail</title>
     </head>
     <referenceContainer name="content">
         <block class="Smartosc\Article\Block\Detail"

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      layout="2columns-right"
+      layout="2columns-left"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <title>Article</title>
+        <title>Article - Insert</title>
     </head>
     <referenceContainer name="content">
-        <block ifconfig="article/configuration/enable" class="Smartosc\Article\Block\Display"
-               name="article_display"
-               template="Smartosc_Article::article.phtml" />
+        <block class="Smartosc\Article\Controller\Index\Insert"
+               name="article_insert"
+               template="Smartosc_Article::article_insert.phtml" />
     </referenceContainer>
 </page>
