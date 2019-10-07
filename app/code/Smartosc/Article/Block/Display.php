@@ -6,22 +6,33 @@ use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Smartosc\Article\Model\ResourceModel\Article\CollectionFactory;
+use Smartosc\Article\Helper\Config;
 
 class Display extends Template
 {
     public $_pageFactory;
     public $_articleCollectionFactory;
+    public $_helper;
 
-    public function __construct(Context $context, PageFactory $pageFactory, CollectionFactory $articleCollectionFactory)
-    {
+    public function __construct(
+        Context $context,
+        PageFactory $pageFactory,
+        CollectionFactory $articleCollectionFactory,
+        Config $helper
+    ) {
         $this->_pageFactory = $pageFactory;
         $this->_articleCollectionFactory = $articleCollectionFactory;
+        $this->_helper = $helper;
         return parent::__construct($context);
     }
 
     public function getArticle()
     {
-        $limit = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 5;
+        $limit = (
+            $this->getRequest()
+                ->getParam('limit')
+        ) ? $this->getRequest()->getParam('limit') : $this->_helper->getArticleConfig();
+
         $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
 
         $collection = $this->_articleCollectionFactory->create();
@@ -41,7 +52,11 @@ class Display extends Template
                 'Magento\Theme\Block\Html\Pager',
                 'smartosc.article'
             )
-                ->setAvailableLimit([5=>5,10=>10,15=>15])
+                ->setAvailableLimit([
+                    $this->_helper->getArticleConfig() => $this->_helper->getArticleConfig(),
+                    $this->_helper->getArticleConfig()*2 => $this->_helper->getArticleConfig()*2,
+                    $this->_helper->getArticleConfig()*3 => $this->_helper->getArticleConfig()*3
+                ])
                 ->setShowPerPage(true)
                 ->setCollection($this->getArticle());
 
